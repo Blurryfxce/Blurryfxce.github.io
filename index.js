@@ -1,9 +1,25 @@
-let chatServer = {
+interface ChatMessage {
+    from: string;
+    to: string;
+    message: string;
+    timestamp: string;
+}
+
+interface ChatUser {
+    username: string;
+    connected: boolean;
+    inbox: ChatMessage[];
+}
+
+let chatServer: {
+    users: { [key: string]: ChatUser };
+    chatHistory: ChatMessage[];
+} = {
     users: {},
     chatHistory: []
 };
 
-function connectUser(username) {
+function connectUser(username: string): void {
     if (chatServer.users[username]) {
         console.log(`User with name ${username} connected already!.`);
     } else {
@@ -17,7 +33,7 @@ function connectUser(username) {
     }
 }
 
-function disconnectUser(username) {
+function disconnectUser(username: string): void {
     if (chatServer.users[username]) {
         chatServer.users[username].connected = false;
         console.log(`${username} disconnected from chat.`);
@@ -27,7 +43,7 @@ function disconnectUser(username) {
     }
 }
 
-function sendMessage(fromUser, toUser, message) {
+function sendMessage(fromUser: string, toUser: string, message: string): void {
     if (chatServer.users[fromUser] && chatServer.users[toUser]) {
         if (chatServer.users[fromUser].connected && chatServer.users[toUser].connected) {
             let chatMessage = {
@@ -47,7 +63,7 @@ function sendMessage(fromUser, toUser, message) {
     }
 }
 
-function sendSystemMessage(message) {
+function sendSystemMessage(message: string): void {
     let systemMessage = {
         from: "System",
         to: "All",
@@ -63,7 +79,7 @@ function sendSystemMessage(message) {
     console.log(`System: ${message}`);
 }
 
-function viewChatHistory(username) {
+function viewChatHistory(username: string): void {
     if (chatServer.users[username]) {
         console.log(`\nChat history for ${username}:`);
         for (let message of chatServer.users[username].inbox) {
@@ -74,7 +90,7 @@ function viewChatHistory(username) {
     }
 }
 
-function sendBroadcastMessage(fromUser, message) {
+function sendBroadcastMessage(fromUser: string, message: string): void {
     if (chatServer.users[fromUser] && chatServer.users[fromUser].connected) {
         let broadcastMessage = {
             from: fromUser,
@@ -94,7 +110,7 @@ function sendBroadcastMessage(fromUser, message) {
     }
 }
 
-function reconnectUser(username) {
+function reconnectUser(username: string):void {
     if (chatServer.users[username]) {
         chatServer.users[username].connected = true;
         console.log(`${username} reconnected to chat.`);
@@ -105,7 +121,7 @@ function reconnectUser(username) {
     }
 }
 
-function removeUser(username) {
+function removeUser(username: string): void {
     if (chatServer.users[username]) {
         disconnectUser(username);
         delete chatServer.users[username];
@@ -115,7 +131,7 @@ function removeUser(username) {
     }
 }
 
-function listConnectedUsers() {
+function listConnectedUsers(): void {
     console.log("Connected users:");
     for (let username in chatServer.users) {
         if (chatServer.users[username].connected) {
@@ -124,14 +140,14 @@ function listConnectedUsers() {
     }
 }
 
-function viewFullChatHistory() {
+function viewFullChatHistory(): void {
     console.log("\nFull chat history:");
     for (let message of chatServer.chatHistory) {
         console.log(`[${message.timestamp}] ${message.from} to ${message.to}: ${message.message}`);
     }
 }
 
-function clearChatHistory() {
+function clearChatHistory(): void {
     chatServer.chatHistory = [];
     for (let username in chatServer.users) {
         chatServer.users[username].inbox = [];
@@ -139,7 +155,7 @@ function clearChatHistory() {
     console.log("Chat history cleared.");
 }
 
-function editMessage(username, oldMessage, newMessage) {
+function editMessage(username: string, oldMessage: string, newMessage: string): void {
     let edited = false;
     for (let message of chatServer.chatHistory) {
         if (message.from === username && message.message === oldMessage) {
@@ -154,7 +170,7 @@ function editMessage(username, oldMessage, newMessage) {
     }
 }
 
-function sendFile(fromUser, toUser, fileName) {
+function sendFile(fromUser: string, toUser: string, fileName: string): void {
     if (chatServer.users[fromUser] && chatServer.users[toUser]) {
         if (chatServer.users[fromUser].connected && chatServer.users[toUser].connected) {
             let fileMessage = {
