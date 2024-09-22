@@ -1,6 +1,10 @@
-## JavaScript to TypeScript migration sample
+## TypeScript Web App
 
-### *About code* 
-Should be multi-user chat simulator that implements back-end logic at the client level written by someone in **JavaScript**. The *program* simulates the operation of a server process to manage user connections, exchange messages, and maintain chat history.<br>
-
-Final version of target file `index.js` contains rewrited code with added types (number, boolean, string) that, in theory, turns it into **TypeScript** syntax.
+### *About* 
+**Branch** contains necessary files to make website alive including `script.js` and its `.ts` rework.
+________
+[**Website**](https://blurryfxce.github.io/) has some interactive features:
+- Header color animation while scroll
+- Modal window pop up with animation
+- Modal window can be closed
+- Fetching data from `jsonplaceholder.typicode.com`
