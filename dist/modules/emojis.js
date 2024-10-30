@@ -1,4 +1,7 @@
-export function generateRandomEmojis(count, modalContent) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.generateRandomEmojis = generateRandomEmojis;
+function generateRandomEmojis(count, modalContent) {
     const emojiRange = [0x1F600, 0x1F64F]; // Діапазон емодзі
     const emojiContainer = document.createElement("div");
     emojiContainer.className = "emojis";
