@@ -1,7 +1,9 @@
 ## TypeScript Web App
 
 ### *About* 
-**Branch** contains necessary files to make website alive including `script.js` and its `.ts` rework.
+**Branch** contains necessary files to make website alive which are divided into modules.<br>
+________
+**Practical work 4**
 ________
 [**Website**](https://blurryfxce.github.io/) has some interactive features:
 - Header color animation while scroll
